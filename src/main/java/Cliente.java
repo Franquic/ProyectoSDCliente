@@ -14,7 +14,7 @@ public class Cliente {
             Scanner sn = new Scanner(System.in);
             sn.useDelimiter("\n");
             
-            Socket sc = new Socket("192.168.0.18", 5000);
+            Socket sc = new Socket("localhost", 5000);
             
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
@@ -22,10 +22,11 @@ public class Cliente {
             // Leer mensaje del servidor
             String mensaje = in.readUTF();
             System.out.println(mensaje);
+
+            System.out.println(in.readUTF());
             
-            // Escribe el nombre y se lo manda al servidor
-            String nombre = sn.next();
-            out.writeUTF(nombre);
+            // Escribe el numero de cuenta y se lo manda al servidor
+            String numeroCuenta = sn.next();
             
             // ejecutamos el hilo
             ClienteHilo hilo = new ClienteHilo(in, out);

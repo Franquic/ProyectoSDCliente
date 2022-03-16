@@ -19,52 +19,78 @@ public class ClienteHilo extends Thread {
     public void run() {
 
         Scanner sn = new Scanner(System.in);
-
-        String mensaje;
+        sn.useDelimiter("\n");
         int opcion = 0;
         boolean salir = false;
         while (!salir) {
 
             try {
-                System.out.println("1. Ingresar Datos de Cuenta, Monto y OP");
-                System.out.println("6. Salir");
+                // Menu de opciones del cliente de un banco
+                
+                System.out.println("1. Retiro");
+                System.out.println("2. Deposito");
+                System.out.println("3. Transferencia mismo banco");
+                System.out.println("4. Transferencia a otros bancos");
+                System.out.println("5. Operaciones Banco B");
+                System.out.println("6. Operaciones Banco C");
+                System.out.println("7. Salir");
 
                 opcion = sn.nextInt();
                 out.writeInt(opcion);
 
                 switch (opcion) {
                     case 1:
-
-                        String numeroCuenta;
                         double monto;
-                        String tipo;
-
-                        System.out.println("Enviare datos al Servidor");
-                        //Envio al ServidorHilo 003
-                        System.out.println("Ingrese el numero de cuenta");
-                        numeroCuenta = sn.next();
-                        out.writeUTF(numeroCuenta);
-                        //Envio al ServidorHilo 004
-                        System.out.println("Ingrese el monto");
+                        System.out.println("Ingrese el monto a retirar");
                         monto = sn.nextDouble();
                         out.writeDouble(monto);
-                        //Envio al Servidor 005
-                        System.out.println("Ingrese el tipo de operacion");
-                        tipo = sn.next();
-                        out.writeUTF(tipo);
-
-                        mensaje = in.readUTF();
+                        String mensaje =  in.readUTF();
                         System.out.println(mensaje);
-
+                        break;
+                    case 2:
+                        double montoDeposito;
+                        System.out.println("Ingrese el monto a depositar");
+                        montoDeposito = sn.nextDouble();
+                        out.writeDouble(montoDeposito);
+                        break;
+                    case 3:
+                        double montoTransferencia;
+                        String numeroCuenta2;
+                        System.out.println("Ingrese el monto a transferir");
+                        montoTransferencia = sn.nextDouble();
+                        out.writeDouble(montoTransferencia);
+                        System.out.println("Ingrese el numero de cuenta a transferir");
+                        numeroCuenta2 = sn.next();
+                        out.writeUTF(numeroCuenta2);
+                        break;
+                    case 4:
+                        double montoTransferenciaOt;
+                        String numeroCuentaOt;
+                        System.out.println("Ingrese el monto a transferir");
+                        montoTransferenciaOt = sn.nextDouble();
+                        out.writeDouble(montoTransferenciaOt);
+                        System.out.println("Ingrese el numero de cuenta a transferir");
+                        numeroCuentaOt = sn.next();
+                        out.writeUTF(numeroCuentaOt);
+                        break;
+                    case 5:
+                        String numeroCuentaB;
+                        System.out.println("Ingrese su numero de cuenta de Banco B");
+                        numeroCuentaB = sn.next();
+                        out.writeUTF(numeroCuentaB);
                         break;
                     case 6:
+                        String numeroCuentaC;
+                        System.out.println("Ingrese su numero de cuenta de Banco C");
+                        numeroCuentaC = sn.next();
+                        out.writeUTF(numeroCuentaC);
+                        break;
+                    case 7:
                         salir = true;
-
                         break;
                     default:
-                        mensaje = in.readUTF();
-                        System.out.println(mensaje);
-
+                        System.out.println("Opcion no valida");
+                        break;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ClienteHilo.class.getName()).log(Level.SEVERE, null, ex);
