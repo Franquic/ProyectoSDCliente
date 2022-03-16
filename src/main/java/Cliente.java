@@ -26,7 +26,7 @@ public class Cliente {
             System.out.println(in.readUTF());
             
             // Escribe el numero de cuenta y se lo manda al servidor
-            String numeroCuenta = sn.next();
+    
             
             // ejecutamos el hilo
             ClienteHilo hilo = new ClienteHilo(in, out);

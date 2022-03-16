@@ -20,6 +20,14 @@ public class ClienteHilo extends Thread {
 
         Scanner sn = new Scanner(System.in);
         sn.useDelimiter("\n");
+
+        String numeroCuenta = sn.next();
+        try {
+            out.writeUTF(numeroCuenta);
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteHilo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         int opcion = 0;
         boolean salir = false;
         while (!salir) {
@@ -37,21 +45,23 @@ public class ClienteHilo extends Thread {
 
                 opcion = sn.nextInt();
                 out.writeInt(opcion);
-
+               
                 switch (opcion) {
                     case 1:
                         double monto;
                         System.out.println("Ingrese el monto a retirar");
                         monto = sn.nextDouble();
                         out.writeDouble(monto);
-                        String mensaje =  in.readUTF();
-                        System.out.println(mensaje);
+                        System.out.println(in.readUTF());
+                        System.out.println(in.readUTF());
                         break;
                     case 2:
                         double montoDeposito;
                         System.out.println("Ingrese el monto a depositar");
                         montoDeposito = sn.nextDouble();
                         out.writeDouble(montoDeposito);
+                        System.out.println(in.readUTF());
+                        System.out.println(in.readUTF());
                         break;
                     case 3:
                         double montoTransferencia;
@@ -62,6 +72,8 @@ public class ClienteHilo extends Thread {
                         System.out.println("Ingrese el numero de cuenta a transferir");
                         numeroCuenta2 = sn.next();
                         out.writeUTF(numeroCuenta2);
+                        System.out.println(in.readUTF());
+                        System.out.println(in.readUTF());
                         break;
                     case 4:
                         double montoTransferenciaOt;
