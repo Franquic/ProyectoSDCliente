@@ -33,7 +33,7 @@ public class MainCliente {
 
                 switch (opc) {
                     case 1:
-                        Cliente clienteA = new Cliente("localhost", 50000);
+                        Cliente clienteA = new Cliente("192.168.0.18", 50001);
                         clienteA.start();
                         clienteA.join();
                         break;
