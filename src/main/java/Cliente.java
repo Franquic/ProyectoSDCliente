@@ -6,15 +6,27 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Cliente {
+public class Cliente extends Thread {
+    
+    private String direccionIP;
+    private int puerto;
+    
+    public Cliente(String IP,int puerto){
+        this.direccionIP = IP;
+        this.puerto = puerto;
+    }
 
-    public static void main(String[] args) {
-        
+    /**
+     *
+     */
+    public void run() {
+          System.out.println("No entro al Try");
         try {
+            System.out.println("Entre al Try");
             Scanner sn = new Scanner(System.in);
             sn.useDelimiter("\n");
             
-            Socket sc = new Socket("localhost", 5000);
+            Socket sc = new Socket(direccionIP, puerto);
             
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
